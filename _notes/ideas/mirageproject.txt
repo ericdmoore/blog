@@ -1,0 +1,102 @@
+/MirageProject#Problem
+
+	I lose people on my website because it is slow
+	  When I lose people on my website -
+	    they don't buy stuff
+	    they don't share my website since they are dealing with it
+	    they don't come back to it ever
+	  I need to own my content because - 
+	    I care about an open web
+	    I don't like other options
+	    I don't know - but if you can help let's talk
+
+
+
+/MirageProject#ValueProp
+  Easiest Way to Eject from WP-PTSD
+
+/MirageProject#Market
+
+/MirageProject#Market/Segments
+
+/MirageProject#Market/Distribution
+
+/MirageProject#Personas/Buyers
+	- Web Agencies
+	- Business
+		- IT
+		- MarCom
+	- Blogger
+	- Developer
+
+/MirageProject#Personas/Users
+
+/MirageProject#Usecases
+
+/MirageProject#Product
+
+/MirageProject#Product/Portfolio
+
+/MirageProject#Roadmap
+	Themes
+
+
+/MirageProject#BuyingProcess
+  ## Options
+  	(Should I Stay Or Should I Go?)
+    
+    - I have to stay in WPHell.com (not by choice hopefully)
+    	- wp.help/plans
+    	- wpezi.com/plans
+    	- wpengine.com
+    	- www.wpsupportplus.com/add-ons/
+    	- totalwpsupport.com
+    	- chloedigital.com 300/mo (min 3 mo)
+    	- upwork.com
+
+  	- Always Leave Abussive Relationships
+  		- Hire a Site Counselor (aka: Developer) to help w/ communication issues
+  		- Find Your Factory Soulmate : Tumblr/Medium/Squarespace
+  		- Hit the Easy Button and Live Happily Ever After
+
+  	- I don't want to wp-manage please
+  		- webflow/dato/contentful
+  		- static site - YAY - marketing has to write in md
+  		- best use of IT's time?
+  		- use hubspot? and hire a front-end/stylist
+
+  	- A friend of mine said this is better than WP (drops the mic - and rev the growth engine)
+  	- I need our developers working on higher value stuff than designing websites
+  	- I need a mobile-friendly micro-site for our next campaign in 30 min
+
+
+/MirageProject#Pricing
+	- Mind the Total Cost of Ownership
+	- 	
+
+/MirageProject#PathtoProfit
+  /CAC
+  /MarCom% of CAC
+  /LTV
+  /Customers%         From MarCom
+  /Customers% Touched By MarCom
+
+/MirageProject#Positioning
+
+/MirageProject#Marketing/
+
+/MirageProject#SalesProcess
+
+/MirageProject#SalesEnablement
+
+/MirageProject#Launch
+
+/MirageProject#ChannelTraining
+
+/MirageProject#ChannelSupport
+
+/MirageProject#EventSupport
+
+/MirageProject#CustomerRetention
+
+/MirageProject#Referrals

@@ -1,0 +1,124 @@
+@import 'libs/vars';
+@import 'libs/functions';
+@import 'libs/mixins';
+@import 'libs/skel';
+
+	@include skel-breakpoints((
+		xlarge: '(max-width: 1680px)',
+		large: '(max-width: 1280px)',
+		medium: '(max-width: 980px)',
+		small: '(max-width: 736px)',
+		xsmall: '(max-width: 480px)',
+		xxsmall: '(max-width: 360px)'
+	));
+
+	@include skel-layout((
+		reset: 'full',
+		boxModel: 'border',
+		grid: (
+			gutters: 2em
+		),
+		breakpoints: (
+			medium: (
+				grid: (
+					gutters: 1.5em
+				)
+			),
+			small: (
+				grid: (
+					gutters: 1em
+				)
+			)
+		)
+	));
+
+// Base.
+
+	@import 'base/page';
+	@import 'base/typography';
+	@import 'base/code';
+
+// Component.
+
+	@import 'components/section';
+	@import 'components/icon';
+	@import 'components/list';
+	@import 'components/form';
+	@import 'components/box';
+	@import 'components/image';
+	@import 'components/table';
+	@import 'components/button';
+	@import 'components/tiles';
+	@import 'components/archives';
+	@import 'components/pagination';
+	@import 'components/gallery';
+
+// Layout.
+
+	@import 'layout/header';
+	@import 'layout/menu';
+	@import 'layout/main';
+	@import 'layout/footer';
+	@import 'layout/wrapper';
+
+.search-result-title {
+    color: floralwhite;
+    text-transform: capitalize;
+    text-decoration-line: underline;
+    text-decoration-style: initial;
+    text-decoration-color: initial;
+}
+
+
+
+@media screen and (min-width: 1281px) {
+ 	#speedread{
+		display: block;
+	}
+}
+
+@media screen and (max-width: 1280px) {
+ 	#speedread{
+		display: none;
+	}
+}
+
+#main > .inner > p:first-of-type:first-letter {
+	color: #1a1a1a;
+	float: left;
+	font-family: Georgia;
+	font-size: 3.5em;
+	line-height: 60px;
+	padding-top: 4px;
+	padding-right: 8px;
+	padding-left: 3px;
+	// only on safair right now
+	// @see: https://caniuse.com/#feat=css-initial-letter
+	// color: #903; 
+	// font-family: Georgia;
+	// initial-letter: 2;
+}
+
+@media screen and (min-width: 901px) {
+	.footnotes {
+		column-count: 3;
+	}
+}
+
+@media screen and (min-width: 501px) and (max-width: 900px){
+	.footnotes {
+		column-count: 2;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.footnotes {
+		column-count: 1;
+	}
+}
+
+/*
+	Phantom by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+*/

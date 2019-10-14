@@ -1,0 +1,42 @@
+
+<% if(theme.show_dates) { %>
+    <h1 class="title"><%- page.title || theme.default_post_title || "Untitled" %></h1>
+    <div class="meta">
+        <%= page.date.format(config.date_format) %>
+    </div>
+<% } else { %>
+    <h1><%- page.title || theme.default_post_title || "Untitled" %> </h1>    
+<% } %>
+
+<% if(page.cover_detail || theme.default_cover_detail) { %>
+    <span class="image main"><img src="<%- page.cover_detail || theme.default_cover_detail %>" alt="" /></span>
+<% } %>
+
+<!-- Gallery -->
+<% if (page.photos && page.photos.length){ %>
+    <%- partial('gallery') %>
+<% } %>
+
+<% if(page.toc) { %>
+    <!-- TOC -->
+    <section> <!-- class="article-toc" -->
+    	<%- toc(page.content, {list_number: false}) %>
+    </section>
+<% } %>
+
+<!-- Content -->
+<%- page.content %>
+
+<!-- Tags -->
+<%- partial('article-tags') %>
+
+<!-- Recommendations -->
+<div>
+    <!-- recommendattions go here: -->
+</div>
+
+<!-- Comments -->
+<div>
+    <%- partial("_partial/comments.ejs") %>
+</div>
+

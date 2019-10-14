@@ -1,0 +1,152 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: Eric D Moore
+subtitle: Author, Investor, Product Person, Texan.
+description: Thoughts On Product Strategy by Eric D Moore
+author: Eric Moore
+language: en
+timezone: America/Chicago
+
+jumprockFormAPI:
+  first:
+    email: ericdmoore+jumprock@gmail.com
+    alias: a54359220459aa20
+  second:
+    email: ericdmoore+jumprock_ericdmoore@gmail.com
+    alias: b2fb257e78b14d86
+  third:
+    email: ericdmoore+jumprock_mirageproject@gmail.com
+    alias: bc886f23a1446d1c
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: https://ericdmoore.com
+root: /
+permalink: :year/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md # File name of new posts
+default_layout: post
+titlecase: false # Transform title into titlecase
+external_link: true # Open external links in new tab
+filename_case: 0
+render_drafts: false
+post_asset_folder: false
+relative_link: false
+future: true
+highlight:
+  enable: true
+  line_number: true
+  auto_detect: false
+  tab_replace:
+
+# Category & Tag
+default_category: uncategorized
+category_map:
+tag_map:
+
+# Date / Time format
+## Hexo uses Moment.js to parse and display date
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# Pagination
+## Set per_page to 0 to disable pagination
+per_page: 12
+pagination_dir: page
+
+# Extensions
+## Plugins: https://hexo.io/plugins/
+feed:
+  type: atom
+  path: atom.xml
+  limit: 20
+  hub:
+  content: false
+
+# http://wzpan.github.io/hexo-theme-freemind/404.html Example for front end usage
+search:
+  path: search.xml
+  field: all
+
+sitemap:
+  path: sitemap.xml
+
+node_sass:
+  outputStyle: compact
+  precision: 5
+  sourceComments: false
+
+# Markdown-it config
+## Docs: https://github.com/celsomiranda/hexo-renderer-markdown-it/wiki
+markdown:
+  render:
+    html: true
+    xhtmlOut: true
+    breaks: true
+    linkify: true
+    typographer: true
+    quotes: "“”‘’"
+  plugins:
+    - markdown-it-abbr
+    - markdown-it-footnote
+    - markdown-it-ins
+    - markdown-it-sub
+    - markdown-it-sup
+  anchors:
+    level: 2
+    collisionSuffix: "v"
+    permalink: true
+    permalinkClass: header-anchor
+    permalinkSymbol: ¶ # "•" —
+
+server:
+  port: 8009
+  log: true
+  ip: "cem.local"
+  compress: true
+  header: true
+
+# https://github.com/tea3/hexo-generator-amp#2-set-the-quick-option
+# generator_amp:
+#   templateDir:  amp-template
+#   assetDistDir: amp-dist
+#   logo:
+#     path:   sample/sample-logo.png
+#     width:  600
+#     height: 60
+#   substituteTitleImage:
+#     path:   sample/sample-substituteTitleImage.png
+#     width:  1024
+#     height: 800
+#   warningLog: false   # To AMP HTML validate automatically, please set true.
+#   theme:
+#     menu:
+#       About Me: /about/index.html
+#       Archives: /archives/index.html
+
+## Themes: https://hexo.io/themes/
+theme: phantom
+# Deployment
+# use a separate gulp process
+# gulpfile.js
+
+# ## Docs: https://hexo.io/docs/deployment.html
+# deploy:
+#   type:

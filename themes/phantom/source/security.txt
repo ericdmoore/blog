@@ -1,0 +1,5 @@
+# Security Email Address
+Contact: security@sycamoore.com
+
+# PGP key for 
+Encryption: https://keybase.io/mooreed/pgp_keys.asc?fingerprint=143ee732df0f56404cce4e918e7126cfa16bc733

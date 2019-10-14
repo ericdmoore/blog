@@ -1,0 +1,39 @@
+<!-- (Non Critical) Gallery CSS -->
+<!-- build:killcss -->
+<% // css('/assets/css/fontawesome-all.css') %>
+<% // css('/assets/css/mins/2.featherlight-1-7-0.min.css') %>
+<% // css('/assets/css/mins/3.featherlight-1-7-0.gallery.min.css') %>
+<!-- endbuild -->
+
+<%- js('https://polyfill.io/v2/polyfill.js?features=IntersectionObserver') %>
+<!-- <script type="text/javascript" 
+		src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>
+ 	
+ 	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel.min.js" 
+		integrity="sha256-3e+NvOq+D/yeJy1qrWpYkEUr6SlOCL5mHpc2nZfX74E=" 
+		crossorigin="anonymous"></script>
+
+	<script type="text/javascript" 
+		src="https://cdnjs.cloudflare.com/ajax/libs/skel/3.0.1/skel-layout.min.js" integrity="sha256-wDeBIVHbULB49n+ZlVrgyK41FR1LBDvk0HDkr9JL7hs=" 
+		crossorigin="anonymous"></script> -->
+
+<!--[if lt IE 9]>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+
+<!-- build:js -->
+<%- js('/assets/js/01.jquery.min.js') %>
+<%- js('/assets/js/02.jquery.detect_swipe.min.js') %> 
+<%- js('/assets/js/03.featherlight.min.js') %>
+<%- js('/assets/js/04.featherlight.gallery.min.js') %>
+<%- js('/assets/js/05.util.js') %>
+<%- js('/assets/js/06.skel.js') %>
+<%- js('/assets/js/09.skel-layout_v3.0.1.js') %>
+<%- js('/assets/js/10.main.js') %>
+<!-- endbuild -->
+
+<%- partial('_partial/jsIncludes/include-disqus') %>
+<%- partial('_partial/jsIncludes/include-google-analytics') %>
+<%- partial('_partial/jsIncludes/include-hotjar') %>

@@ -1,0 +1,18 @@
+<% let makeButton = (tag)=>{
+	return '<a href="' + config.root + tag.path + '" class="button small">' + tag.name + '</a>'
+}%> 
+
+<% if(page.categories) { %>
+	<div style="display:inline-block" class="actions">
+	    <a style="margin:0 15pt 0 0;" 
+	  	   <% if(!page.categories.first()){
+	  	   		console.log(page)
+	  		} %>
+	       href="/<%-page.categories.first().path %>" 
+	       class="button small special"> <%- page.categories.first().name %> </a>
+	</div>
+<% } %>
+<div style="display:inline-block" class="tags">
+    <%- page.tags.reduce( (all, t)=>{return all.concat(makeButton(t))}, [])
+    			 .join(' ') %>
+</div>

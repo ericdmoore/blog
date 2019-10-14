@@ -1,0 +1,94 @@
+Turn Into Publication:
+    Far Out Technical Plugin:
+      PDFDownload:
+        - Gen new HTML (w/ Template)
+        - Gen PDF from HTML
+        - Upload/Sync to S3
+        - Replace {download:true} with download URL
+        - Clean Up?
+      MyOwnVideo:
+        - Upload (most) any video file
+        - Transcoded to
+            - mp4:  type="video/mp4"
+            - webm: type="video/webm"
+            - ogv: type="video/ogg"
+
+Book Reviews:
+  Affiliate:
+     - Amazon
+     - Barnes & Noble
+
+Product Reviews:
+  Physical Products:
+
+
+
+
+Musician Model: Music is free - Touring costs the listener. Get ready for tour busses.
+
+*FREE* =  N reads a month + read more by sharing, commenting, 
+*Members* =  Unlimited Reads + email news letters
+*Partners* =  Unlimited Reads + first access to events + planning
+*Board Members* = The team and I are fundamentally committed to a vibrant, thriving, free and open internet in support of press. Contact us if you are interested in making a substantial partnership with us in this way. (edited)
+
+
+
+Published Amazon Wish List:
+
+Sheep Options: 
+- Turn Off Ads Option
+- Affilate Links
+- Sponsored posts (not near-term realistic)
+
+- paid referals?
+- paid link backs?
+- paid press?
+
+
+
+Business Model:
+  Sell Subsciption Plans:
+  Donate _____(Book?) For Review:
+
+Technical:
+  Make the Most Existing Content
+
+
+Subscriptions:
+  Reader:
+    - FREE
+    - All Written Content
+    - Preivews of Videos
+    - Previews of all PDFs (Front Cover + TOC + Preface)
+    - Available to buy Premium Reports (Front Cover + TOC + Preface)
+    - Get 
+  Member:
+    - FREE
+      - Email Account
+      - Phone
+      - Address
+      - Can login via fb, tw, g+, or email
+    - Can Write Reviews
+    - All Written Content
+    - All Videos
+    - All PDFs
+    - Access to Audio Podcast Version
+    - Select 4 Courtesy Reports / year
+  Subscriber:
+    - 5 / mo
+    - All Written Content
+    - All Videos
+    - All PDFs
+    - Access to Audio Podcast Version
+    - Select 4 Courtesy Reports / year
+  Company:
+    - 75 / mo (40% off)
+    - up to 25 Subscribers
+      - Admin
+        - initial list (individual links)
+        - creates a share link 
+      - Company Membership
+        - Request Invite for Coworker
+    - All Content
+    - Access to Audio Podcast Version
+    - All Reports / year

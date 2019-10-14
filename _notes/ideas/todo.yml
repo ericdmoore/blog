@@ -1,0 +1,154 @@
+Technical:    
+
+  MonetizeMySite:
+  - BookReviews:
+      BookGridWidget:
+        UIChange: Add Two Buttons (under the bookcover thumbnail)
+        Buttons:
+          - Review
+          - BuyIt
+        OtherIdea: Add A Star Review Rating. 1-5stars  by 0.5stars
+        Layout: |
+          |-----------|
+          |           |
+          |   Cover   |
+          |   Image   |
+          |           |
+          |-----|-----|
+          | Buy |MyRev|
+          |-----|-----|
+          |⭐️⭐️⭐️⭐️⭐️|
+
+      ButtonOptions: 
+        - Amazon Buy Button:
+          - //fontawesome.com/icons/amazon?style=brands
+          - //fontawesome.com/icons/shopping-cart?style=solid`
+          - //fontawesome.com/icons/dollar-sign?style=solid
+        - Review:
+          - https://fontawesome.com/icons/info-circle?style=solid
+          - https://fontawesome.com/icons/thumbs-up?style=regular
+          - https://fontawesome.com/icons/thumbs-down?style=regular
+          - https://fontawesome.com/icons/book?style=solid
+          - https://fontawesome.com/icons/book?style=regular
+          - https://fontawesome.com/icons/bookmark?style=regular
+          - https://fontawesome.com/icons/bookmark?style=solid
+          - https://fontawesome.com/icons/bullhorn?style=solid
+          - https://fontawesome.com/icons/star?style=solid
+          - https://fontawesome.com/icons/star-half?style=solid
+      Widget:
+        Similar: Image Grid
+        WritingStyle: |
+          { BookName:'', | Title | Book | Name
+            BookImgURL:'', | Cover | BookImg |
+            ClickURL:'', | Buy | LinkTo | 
+            ReviewURL:'',  | Review 
+            StarRating: 4.5 } | Rating
+
+  Theme Issues:
+    - [Done] Twittercard /OG Image for idnex page?
+    - [Done?] Image Grid
+    - [Rough!] Wide Image Config
+    - use <picture> tags with sourceset children
+
+  lighthouse complaints:
+    - [Done] register service worker
+      - respond with 200 offline
+      - splash screen
+    - Manifest
+      - [Done] theme the address bar
+      - [Done] prompt to install on address bar
+    - Reduce time to first meaningful paint
+      - [Not Started] reduce render blocking stylesheet
+      - [Done] lazy load offscreen images
+        - Ref: https://developers.google.com/web/updates/2016/04/intersectionobserver#intersect_all_the_things
+        - Ref: https://github.com/WICG/IntersectionObserver/tree/gh-pages/polyfill
+  
+  gtmetrix:
+    - right_size_images
+
+  Make Tab Search:
+    <link rel="search" type="application/opensearchdescription+xml" href="/opensearch.xml" title="npm">
+
+  Other Sites:
+    im.ericdmoore.com
+    by.ericdmoore.com
+      /projects
+        - home
+        - personal (flugtag)
+        - digital
+        - professional
+      /photos
+        - tags
+        - series
+        - geo
+        - categories
+        - licence
+      /drawings
+        - caption
+        - inspiration
+        - narration
+        - creation
+        - licence
+      /openproducts (product=Mirage)
+            Formatting/GitBookHTML?/PDF/iBook/
+        /{{projectName}}#Problem
+        /{{projectName}}#ValueProp
+          Easiest Way to Eject from WP-PTSD
+        /{{projectName}}#Market
+        /{{projectName}}#Market/Segments
+        /{{projectName}}#Market/Distribution
+        /{{projectName}}#Personas/Buyers
+        /{{projectName}}#Personas/Users
+        /{{projectName}}#Usecases
+        /{{projectName}}#Product
+        /{{projectName}}#Product/Portfolio
+        /{{projectName}}#Roadmap
+        /{{projectName}}#BuyingProcess
+          /Comps
+            wp.help/plans/
+        /{{projectName}}#Pricing
+        /{{projectName}}#PathtoProfit
+          /CAC
+          /MarCom% of CAC
+          /LTV
+          /Customers%         From MarCom
+          /Customers% Touched By MarCom
+        /{{projectName}}#Positioning
+        /{{projectName}}#Marketing/
+        /{{projectName}}#SalesProcess
+        /{{projectName}}#SalesEnablement
+        /{{projectName}}#Launch
+        /{{projectName}}#ChannelTraining
+        /{{projectName}}#ChannelSupport
+        /{{projectName}}#EventSupport
+        /{{projectName}}#CustomerRetention
+        /{{projectName}}#Referrals
+
+
+Launch Posts:
+  - Marketing Thoughts from Fight Night
+  - "Real Talk : Contrasting Racism and Prejudice"
+  - Christ in Politics
+  - Comfort is very functional
+  - Complex-vs-Complicated.md
+  - Performance-Is-A-BIG-Feature.md
+  - Human-Nature-with-Candy-Vegetables.md
+  - The-Ethics-of-Analytics-Systems.md
+  - A-Case-against-A-B-Testing.md
+  - What-is-Stregy-After-All.md
+  - The-Fundamentals-of-Requirements.md
+  - What-Exactly-is-an-MVP.md
+  - Waves-of-Innovation.md
+  - Is-the-Age-of-Curation-Dead.md
+  - The-Crux-of-Pricing.md
+  - On-Product-Roadmaps.md
+  - Force-your-Data-to-KNOW-your-Audience.md
+  - Strike-a-Balance-Getting-New-Customers-vs-Keeping-Old-Cutomers-Happy.md
+  - Attention-to-Detail.md
+  - On-Architecture-and-Constraints.md
+  - Modern-Product-Strategies.md
+  - Battle-of-Steves.md
+
+On Deck Posts:
+  
+

@@ -1,0 +1,56 @@
+<!-- Header -->
+<header id="header">
+    <div class="inner">
+        <!-- Logo -->
+        <a href="<%- config.root %>" class="logo">
+            <span class="symbol"> <img src="<%- theme.logo_src %>" alt="" /> </span>
+            <span class="title"> <%-config.title || ""%> </span>
+        </a>
+        <% if(page.layout ==='post'){ %> 
+        <!-- SpeedRead -->
+        <div id='speedread'> 
+            <a style="margin:0 0 0 10pt;float: right;" href="javascript:(function(){sq=window.sq=window.sq||{};if(sq.script){sq.again();}else{sq.bookmarkletVersion='0.3.0';sq.iframeQueryParams={host:'//squirt.io',userId:'ericdmoore-dot-com',};sq.script=document.createElement('script');sq.script.src=sq.iframeQueryParams.host+'/bookmarklet/frame.outer.js';document.body.appendChild(sq.script);}})();">
+                <i class="fas fa-bolt" aria-hidden="true"></i>
+                <i class="fas fa-book" aria-hidden="true"></i>
+            </a>
+        </div>
+        <% } %>
+        
+        <!-- Nav -->
+        <nav>
+            <ul>
+                <li><a href="#menu">Menu</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Menu -->
+<nav id="menu">
+    <h2>Menu</h2>
+    <ul>
+        <% for (var i in theme.menu){ %>
+        <li><a href="<%- url_for(theme.menu[i]) %>"><%= i %></a></li>
+        <% } %>
+    </ul>
+
+    <table style="border-collapse:inherit;">
+      <tr style="background-color: inherit;">
+        <td> 
+            <i class="fas fa-search" aria-hidden="true"></i> 
+        </td>
+        <td>
+            <div class="search">
+                    <!-- style="margin-bottom:1em" -->
+                    <input class="st-search-input st-default-search-input form-control" 
+                           type="text" 
+                           id="local-search-input" 
+                           name="q" 
+                           placeholder="Search: Everyone Is In Sales"/>
+                           <!-- results="0" -->
+            </div>
+        </td>
+      </tr>
+    </table>
+    <div id="local-search-result"> </div>
+</nav>

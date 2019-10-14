@@ -1,0 +1,48 @@
+<%
+
+// helper function to deal with exteranl images starting with '//'
+let fmtImgURL = (uri)=>{
+    if(uri.indexOf('//') >= 0){
+        return 'http:' + uri;
+    }
+    return config.url + uri 
+};
+
+let _author = "Eric Moore";
+let _publisher = "Eric Moore";
+/*
+<!-- Schema.org markup for Google+ -->
+<!-- <meta itemprop="name" content=" % title % ">
+<meta itemprop="image" content="% http://www.example.com/image.jpg % ">
+<meta itemprop="description" content="% desc %"> -->
+*/
+
+%>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Article",
+  "author": "<%- author || _author %>",
+  "url": "<%- url %>",
+  "name": "<%- title %>",
+  "description": "<%= desc %>",
+  "headline" :  "<%= desc %>",
+  "publisher" : {
+    "@type": "Person",
+    "itemtype": "Person",
+    "name": "<%- author || _author %>"
+  },
+  "dateModified": "2008-01-25",
+  "datePublished": "2008-01-25",
+  "image": {
+    "@context": "http://schema.org",
+    "@type": "ImageObject",
+    "author": "<%- author || _author %>",
+    "datePublished": "2008-01-25",
+    "height": "400",
+    "width": "400",
+    "url": "<%-  fmtImgURL( page.cover_detail || page.cover_index || theme.larger_favicons+'@2x.png' ) %>",
+    "contentUrl": "<%-  fmtImgURL( page.cover_detail || page.cover_index || theme.larger_favicons+'@2x.png' ) %>"
+  }
+}
+</script>

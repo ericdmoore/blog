@@ -1,0 +1,67 @@
+<% /* 
+
+# NOTE:
+Twitter thumbnail: 120x120px
+Twitter large image: 280x150px 
+
+# Examples
+twitter:Card = type
+twitter:site = @NYTimes
+twitter:creator = @ericdmoore
+twitter:title = {{title}}
+twitter:image = {{ heroImg || indexImg }}
+twitter:image:alt = Some Caption. Limit 420 chars
+
+#  Determine if we are on a post, page etc
+*/ 
+
+let isPost = (page)=>{
+    return page.layout && page.layout.toLowerCase() === 'post'
+}
+
+// helper function to deal with exteranl images starting with '//'
+let fmtImgURL = (uri)=>{
+    if(uri.indexOf('//') >= 0){
+        return 'http:' + uri;
+    }
+    return config.url + uri 
+};
+
+let imgURL = (page, compareFn)=>{
+    if( compareFn(page) ){
+        let _pic = page.cover_detail || page.cover_index;
+        return fmtImgURL(_pic)
+        
+    } else{
+        let _pic =  theme.larger_favicons+'@2x.png' ;
+        return fmtImgURL(_pic)
+    }
+};
+
+let cardType = (page, compareFn)=>{
+    if(compareFn(page)){
+        return 'summary_large_image';
+    }
+    else{
+        return 'summary';
+    }
+}; 
+%>
+<!-- Twitter Card --> 
+<meta name="twitter:card" content="<%- cardType(page, isPost) %>"/>
+<meta property="twitter:card" content="<%- cardType(page, isPost) %>"/>
+
+<meta name="twitter:site" content="@eridmoore"/>
+<meta property="twitter:site" content="@eridmoore"/>
+
+<meta name="twitter:creator" content="@ericdmoore"/>
+<meta property="twitter:creator" content="@ericdmoore"/>
+
+<meta name="twitter:image" content="<%- imgURL(page, isPost) %>"/>
+<meta property="twitter:image" content="<%- imgURL(page, isPost) %>"/>
+
+<meta name="twitter:description" content="<%= desc %>"/>
+<meta property="twitter:description" content="<%= desc %>"/>
+
+<meta name="twitter:title" content="<%- title %>"/>
+<meta property="twitter:title" content="<%- title %>"/>

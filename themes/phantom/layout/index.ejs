@@ -1,0 +1,13 @@
+<header>
+    <h1><%- theme.subtitle_main %></h1>
+    <h2><%- theme.subtitle_main_h2 %></h2>
+    <p><%- theme.susbtitle_secondary %></p>
+</header>
+
+<section class="tiles">
+    <% page.posts.forEach(function(item, index){ %>
+        <%- partial('_partial/article-index', {item: item, index: index}) %>
+    <% }); %>
+</section>
+
+<%- partial('_partial/pagination') %>

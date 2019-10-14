@@ -1,0 +1,12 @@
+
+<div class="gallery-container thumbnail data-featherlight-gallery">
+    <% if (page.photos){ %>
+        <% page.photos.forEach(function(photo){ %>
+            <div class="picture-container">
+                <a class="thumbnail gallery" href="#" data-featherlight="<%- photo %>">
+                    <img src="<%- photo %>" class="img-thumbnail" alt=""/>
+                </a>
+            </div>
+        <% }); %>
+    <% } %>
+</div>

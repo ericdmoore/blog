@@ -1,0 +1,105 @@
+<% /*
+	// ref: https://zespia.tw/warehouse/Query.html
+
+	Sort by:
+	- Tag with Most Recent Post?
+	- Tag with Most Post Quantity?
+	- Alphbetically by Tag Name
+
+	Columns Layout:
+	- desired columns
+		- config column height?
+*/
+
+let arr_tags = site.tags.map((item)=>{
+					return {name:  item.name, 
+							path:  item.path,
+							posts: item.posts,
+							count: item.posts.length}
+				});
+
+arr_tags.sort((a,b)=>{return b.count - a.count });
+
+let describe = (arr)=>{
+
+	const len =  arr_tags.length;
+	const per10 =  Math.floor(len*.1) - 1;
+	const per20 =  Math.floor(len*.2) - 1;
+	const per30 =  Math.floor(len*.3) - 1;
+	const per40 =  Math.floor(len*.4) - 1;
+	const per50 =  Math.floor(len*.5) - 1;
+	const per60 =  Math.floor(len*.6) - 1;
+	const per70 =  Math.floor(len*.7) - 1;
+	const per80 =  Math.floor(len*.8) - 1;
+	const per90 =  Math.floor(len*.9) - 1;
+
+	return {max:arr_tags[0].count,
+			count:len,
+			deciles:[arr_tags[per10].count,
+					 arr_tags[per20].count,
+					 arr_tags[per30].count,
+					 arr_tags[per40].count,
+					 arr_tags[per50].count,
+					 arr_tags[per60].count,
+					 arr_tags[per70].count,
+					 arr_tags[per80].count,
+					 arr_tags[per90].count,
+					 arr_tags[len-1].count]
+			};
+};
+
+let colorRange = (desc)=>{
+	let _max = Math.max(desc.max);
+	let light_color = 75;
+	let dark_color = 2;
+	
+	return (input)=>{
+		return Math.floor(light_color - (input/_max * (light_color - dark_color)) );
+	};
+};
+
+let units = (idx, units)=>{
+	let prefix = units.toString()+"u"
+	return ((idx+1) % Math.floor(12/units) === 0) ? prefix + "$" : prefix;
+};
+
+let colorWeight = colorRange( describe(arr_tags) );
+
+
+/* work in progess: Add Search
+
+<!--
+<div class="6u$ -6u 12u$(xsmall)">
+  <form method="post" action="#">
+    <label for="demo-email">Search</label>
+    <input type="text" name="search" id="search" value="" placeholder='Search for "Books"' />
+  </form>
+</div> 
+-->
+
+*/
+
+
+%> 
+
+<section >
+	<div class="inner">
+		<h2>All Tags</h2>
+
+	<div class="row">
+		<% arr_tags.forEach((tag, idx)=>{ %>
+		<div style="margin: 12pt 0 0 0;" 
+			 class="<%- units(idx,2)  %>(xlarge) 
+			 		<%- units(idx,3)  %>(large) 
+			 		<%- units(idx,4)  %>(medium) 
+					<%- units(idx,6)  %>(small) 
+					<%- units(idx,12) %>(xsmall)">
+		<a  style="text-decoration: none; color: hsl(0,0%,<%- colorWeight(tag.count) %>%);" 
+	   		href="/<%- tag.path %>"><%- tag.name %> #(<%- tag.count %>)
+	   	</a>
+	    </div>
+		<% }) %>	
+	</div>
+
+	</div>
+</section>

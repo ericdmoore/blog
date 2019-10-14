@@ -1,0 +1,55 @@
+==================================================================
+https://keybase.io/mooreed
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://ericdmoore.com
+  * I am mooreed (https://keybase.io/mooreed) on keybase.
+  * I have a public key ASD-NeVY0ocTqaOhw4y0YpDzix_CMQcME1hvsfXnIOIdCwo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120f637c7d8f24c1d10aa24637516c3f30b3fb2d63b89297e40aa9429478de9596e0a",
+      "host": "keybase.io",
+      "kid": "0120fe35e558d28713a9a3a1c38cb46290f38b1fc231070c13586fb1f5e720e21d0b0a",
+      "uid": "fad5c5a2c914482319576245ce37bd00",
+      "username": "mooreed"
+    },
+    "merkle_root": {
+      "ctime": 1507650449,
+      "hash": "e2f85219a279474f014ad1c7f4d4735d8ded6ef4429dcae80e88a32fc1a8832d03e230cecc4e039795632d9c3418cba2596b4c8cf23a599ccaffa48d1be712ae",
+      "hash_meta": "01b1c66334f3c382a4254ce2989fa55a58b72ca8d86ed3c61b2116df1fc9ce75",
+      "seqno": 1552773
+    },
+    "service": {
+      "hostname": "ericdmoore.com",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 1
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "1.0.33"
+  },
+  "ctime": 1507650476,
+  "expire_in": 504576000,
+  "prev": "6802f87788ece25d8b07a84424f9dd3513a57df187c0dc6039c361adaeeebb89",
+  "seqno": 34,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEg/jXlWNKHE6mjocOMtGKQ84sfwjEHDBNYb7H15yDiHQsKp3BheWxvYWTFA0Z7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTIwZjYzN2M3ZDhmMjRjMWQxMGFhMjQ2Mzc1MTZjM2YzMGIzZmIyZDYzYjg5Mjk3ZTQwYWE5NDI5NDc4ZGU5NTk2ZTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwZmUzNWU1NThkMjg3MTNhOWEzYTFjMzhjYjQ2MjkwZjM4YjFmYzIzMTA3MGMxMzU4NmZiMWY1ZTcyMGUyMWQwYjBhIiwidWlkIjoiZmFkNWM1YTJjOTE0NDgyMzE5NTc2MjQ1Y2UzN2JkMDAiLCJ1c2VybmFtZSI6Im1vb3JlZWQifSwibWVya2xlX3Jvb3QiOnsiY3RpbWUiOjE1MDc2NTA0NDksImhhc2giOiJlMmY4NTIxOWEyNzk0NzRmMDE0YWQxYzdmNGQ0NzM1ZDhkZWQ2ZWY0NDI5ZGNhZTgwZTg4YTMyZmMxYTg4MzJkMDNlMjMwY2VjYzRlMDM5Nzk1NjMyZDljMzQxOGNiYTI1OTZiNGM4Y2YyM2E1OTljY2FmZmE0OGQxYmU3MTJhZSIsImhhc2hfbWV0YSI6IjAxYjFjNjYzMzRmM2MzODJhNDI1NGNlMjk4OWZhNTVhNThiNzJjYThkODZlZDNjNjFiMjExNmRmMWZjOWNlNzUiLCJzZXFubyI6MTU1Mjc3M30sInNlcnZpY2UiOnsiaG9zdG5hbWUiOiJlcmljZG1vb3JlLmNvbSIsInByb3RvY29sIjoiaHR0cHM6In0sInR5cGUiOiJ3ZWJfc2VydmljZV9iaW5kaW5nIiwidmVyc2lvbiI6MX0sImNsaWVudCI6eyJuYW1lIjoia2V5YmFzZS5pbyBnbyBjbGllbnQiLCJ2ZXJzaW9uIjoiMS4wLjMzIn0sImN0aW1lIjoxNTA3NjUwNDc2LCJleHBpcmVfaW4iOjUwNDU3NjAwMCwicHJldiI6IjY4MDJmODc3ODhlY2UyNWQ4YjA3YTg0NDI0ZjlkZDM1MTNhNTdkZjE4N2MwZGM2MDM5YzM2MWFkYWVlZWJiODkiLCJzZXFubyI6MzQsInRhZyI6InNpZ25hdHVyZSJ9o3NpZ8RAgNEfxZUL3/hQDbUbSnr4CrHApK57qyTKjYSRRZsePKanLu7XEFnNef5SCv1BIL4JKLK6xqe4m0pJNiaYj5P2C6hzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIEP7WSGO+AAFA/bNMDtmMVeydSOKG7mtSBOApV9V4rbKo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/mooreed
+
+==================================================================

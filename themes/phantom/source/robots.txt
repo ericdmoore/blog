@@ -1,0 +1,4 @@
+User-agent: Twitterbot
+Allow: *
+
+Sitemap: https://ericdmoore.com/sitemap.xml

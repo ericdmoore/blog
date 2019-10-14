@@ -1,0 +1,33 @@
+Serverless Functions
+
+AWS:
+	Execution Time:
+		- Free:     400,000 GB-s
+		- Paid: $0.00001667/GB-s 
+	Requests:
+		- Free:           1 MM requests 
+		- Paid: $0.20 per 1 MM requests
+	RunTimes:
+		- Native Java, Node.js, C#, Python
+	Reference:
+		https://aws.amazon.com/lambda/pricing/
+
+Microsoft:
+	Execution Time:
+		- Free:   400,000 GB-s
+		- Paid: $0.000016/GB-s	
+	Requests:
+		- Free: 		1 MM requests
+		- Paid: $0.20 per MM requests	
+	Reference:
+		https://azure.microsoft.com/en-us/pricing/details/functions/
+
+Google:
+	Execution Time:
+			- Free:   400,000 GB-s
+			- Paid: $0.000016/GB-s	
+		Requests:
+			- Free: 		1 MM requests
+			- Paid: $0.20 per MM requests	
+		Reference:
+			https://azure.microsoft.com/en-us/pricing/details/functions/	

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="731px" height="730px" viewBox="0 0 731 730" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 48.2 (47327) - http://www.bohemiancoding.com/sketch -->
+    <title>mTriangles</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#55D653" stop-opacity="0.8" offset="0%"></stop>
+            <stop stop-color="#55D653" stop-opacity="0.3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#4B5EF0" stop-opacity="0.8" offset="0%"></stop>
+            <stop stop-color="#4B5EF0" stop-opacity="0.3" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Logo" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="mTriangles">
+            <polygon id="Triangle" fill="url(#linearGradient-1)" points="730.961032 0 730.961032 730 259.37327 730"></polygon>
+            <polygon id="Triangle" fill="url(#linearGradient-2)" points="-1.42108547e-14 0 471.587763 730 -1.42108547e-14 730"></polygon>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+<%
+    let cssClass = "style" + (index % 12 + 1);
+%>
+
+<article class="<%- cssClass %>">
+    <span class="image"> 
+    	<img style="opacity: 0.5;" 
+    		 class="js-lazy-image" 
+    		 src='/images/rect.svg'
+             alt=""
+             data-src="<%- item.cover_index || theme.default_cover_index %>"/>
+    </span> 
+    <a href="/<%- item.path %>">
+        <h2><%- item.title || theme.default_post_title || "Untitled" %></h2>
+        <div class="content">
+            <p><%- item.subtitle || "" %></p>
+        </div>
+    </a>
+</article>

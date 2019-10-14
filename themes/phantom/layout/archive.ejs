@@ -1,0 +1,86 @@
+<%
+    /***************************************/
+    // Set THESE Config Vars
+    // @ToDo: Move these to the theme _config.yml
+    const _width = 12;
+    const _cols = 2;
+    const _singlePage = false;
+    /***************************************/
+
+    const needPagination = !_singlePage;
+    var title = "Archives"
+    var postList = [];
+    const _colwidth = _width / _cols;
+
+    function checkStop(stopper){
+        let count = 0
+        return function(check_number){
+            const check = stopper;
+            count += check_number;
+            return (count % check === 0) ? "$" : "";
+        }
+    };
+
+    function* chunkArray(arr,size=1){
+        let mycopy = arr.slice(0);
+        while (mycopy.length > 0) yield mycopy.splice(0,size);
+    };
+
+    if (page.category) {
+        site.categories.forEach(function(item) {
+            if(item.name === page.category) {
+                postList = item.posts.slice();
+            }
+        });
+        title = page.category;
+    }
+    else if (page.tag) {
+        site.tags.forEach(function(item) {
+            if(item.name === page.tag) {
+                postList = item.posts;
+            }
+        });
+        title = page.tag;
+    } 
+
+    else if(_singlePage){
+        postList = site.posts;
+    } 
+
+    else {
+        postList = page.posts;
+    }
+
+    let is_term = checkStop(_cols);
+    let is_term2 = checkStop(2);
+
+%>
+
+<section class="archives">
+    <% if(title) { %>
+        <% if(page.tag || page.category) { %> 
+            <a href="..">
+                <i class="fas fa-arrow-up"></i>
+            </a>
+        <% } %> 
+        <div 
+            style="text-decoration-style: underline;" 
+            class="archive-title"><%- title %>
+        </div>
+        <hr/>
+    <% } %>
+
+    <div class="row">
+
+            <ul class="archive-list">
+               <% postList.forEach(function(item){ %>
+                    <%- partial('_partial/article-archive', {item: item}) %>
+                <% }); %>
+            </ul>
+
+    </div>
+</section>
+
+<% if(needPagination){ %> 
+    <%- partial('_partial/pagination') %>
+<% } %>

@@ -1,0 +1,12 @@
+<% if (page.type === undefined){ %>
+	<%- partial('_partial/article-page') %>
+
+<% } else if (page.type.toLowerCase() === 'tags' ){ %>
+	<%- partial('_partial/page_listAllTags') %>	
+
+<% } else if (page.type.toLowerCase() === 'categories') { %>
+	<%- partial('_partial/page_listAllCategories') %>
+
+<% } else { %>   
+	<%- partial('_partial/article-page') %>
+<% } %>

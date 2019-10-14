@@ -1,0 +1,107 @@
+<%
+let cleanUpText = (mytext)=>{
+    return mytext
+            .replace(/^\s*/, '')
+            .replace(/\s*$/, '')
+            .replace(/\r?\n|\r/, '')
+            .replace(/\r?\n|\r/, '')
+            .replace(/\r?\n|\r/, '')
+            .replace(/\r?\n|\r/, '')
+            .replace(/\r?\n|\r/, '');
+};
+
+let p = null;
+
+if(page.canonical_path){
+    p = page.canonical_path.substring(0,page.canonical_path.length - 'index.html'.length)
+}
+
+else if(page.path){
+    p = page.path.substring(          0,page.path.length            - 'index.html'.length)
+} 
+
+else {
+    p = ''
+} 
+%>
+
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="theme-color" content="#7bd0c1"/>
+<!-- new section for DNS prefetching 
+    ref: chromium.org/developers/design-documents/dns-prefetching -->
+<meta http-equiv="x-dns-prefetch-control" content="on">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//polyfill.io">
+<link rel="dns-prefetch" href="//cdnsjs.com">
+<link rel="dns-prefetch" href="//unpkg.com">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<!-- end DNS prefetching -->
+
+<!-- build:css -->
+<!-- Custom CSS -->
+<link type="text/css" 
+      rel="stylesheet" 
+      href="/sass/main.css<%- theme.cachebust.main_css %>"/>
+<!-- Font CSS -->
+<link rel="stylesheet"
+      type="text/css" 
+      href="/assets/css/fontawesome-all.css"/>
+
+<link rel="stylesheet"
+      type="text/css" 
+      href="/assets/css/SourceProSans-font.css"/>
+<!-- endbuild -->
+
+<!-- Canonical -->
+<link rel=canonical href="<%- config.url + config.root + p %>"/>
+
+<!--[if lt IE 8]>
+    <%- js('js/ie/html5shiv.js') %>
+<![endif]-->
+
+<!--[if lt IE 8]>
+    <%- css('sass/ie8.css') %>
+<![endif]-->
+
+<!--[if lt IE 9]>
+    <%- css('sass/ie9.css') %>
+<![endif]-->
+
+<!-- Manifest -->  
+<link rel="manifest" href="/manifest.json">
+
+<!-- W3C Meta Tags -->  
+<meta name="author" content="<%= page.author || config.author || 'Eric D Moore' %>"/>
+<meta name="keywords" content="keywords,here">
+
+<!--Description-->
+<%   let desc =    ((page.excerpt) ? cleanUpText(strip_html(page.excerpt)) : null) 
+                || ((page.content) ? cleanUpText(strip_html(page.content)) : null) 
+                || page.description
+                || config.description
+                || ''; %><meta name="description" content="<%= desc.substring(0,400) %>"/>
+<!-- Title -->
+<%
+    var title = [];
+    if (page.current > 1) title.push(__('page', page.current));
+    if (page.title) title.push(page.title);
+    if (page.category) title.push(page.category);
+    if (page.tag) title.push(page.tag);
+    if (page.archive) {
+        if (page.year) title.push(__('archive_b', page.year + (page.month ? '/' + page.month : '')));
+        else title.push(__('archive_a'));
+    }
+    title.push(config.title);
+
+%><title><%= title.join(' - ') %></title>
+
+<%- partial('head-advanced', {title:title.join(' - '), 
+                              desc: desc.substring(0,400),
+                              author: page.author || config.author || 'Eric D Moore',
+                              url: config.url + config.root + p }) %> 
+
+
+</head>

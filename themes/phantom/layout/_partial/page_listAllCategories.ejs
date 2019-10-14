@@ -1,0 +1,90 @@
+<%
+
+let arr_categories = site.categories.map((item)=>{
+					return {name:  item.name.toLowerCase(), 
+							path:  item.path.toLowerCase(), 
+							posts: item.posts, 
+							count: item.posts.length} });
+
+arr_categories.sort((a,b)=>{return b.count - a.count });
+
+let describe = (arr)=>{
+	
+	const len =  arr.length;
+	const per10 =  Math.floor(len*.1) - 1;
+	const per20 =  Math.floor(len*.2) - 1;
+	const per30 =  Math.floor(len*.3) - 1;
+	const per40 =  Math.floor(len*.4) - 1;
+	const per50 =  Math.floor(len*.5) - 1;
+	const per60 =  Math.floor(len*.6) - 1;
+	const per70 =  Math.floor(len*.7) - 1;
+	const per80 =  Math.floor(len*.8) - 1;
+	const per90 =  Math.floor(len*.9) - 1;
+
+	if(len>10){
+		return {
+				count:len,
+				max:arr[0].count,
+				min:arr[len-1].count,
+				sections:[arr[per10].count,
+						 arr[per20].count,
+						 arr[per30].count,
+						 arr[per40].count,
+						 arr[per50].count,
+						 arr[per60].count,
+						 arr[per70].count,
+						 arr[per80].count,
+						 arr[per90].count,
+						 arr[len-1].count]
+				};
+	} else {
+		let _sections = [];
+		
+		for(item of arr){
+			_sections.push(item.count);
+		}
+
+		return {
+			count:    len,
+			max:      arr[0].count,
+			min:      arr[len-1].count,
+			sections: _sections
+		}
+	}
+};
+
+let colorRange = (desc)=>{
+	let _max = Math.max(desc.max)
+	let light_color = 75;
+	let dark_color = 2;
+	
+	return (input)=>{
+		return Math.floor(light_color - (input/_max * (light_color - dark_color)) );
+	};
+};
+
+let units = (idx, units)=>{
+	let prefix = units.toString()+"u"
+	return ((idx+1) % Math.floor(12/units) === 0) ? prefix + "$" : prefix;
+};
+
+let colorWeight = colorRange( describe(arr_categories) );
+%> 
+
+<section>
+	<div class="inner">
+		
+	<h2>All Categories</h2>
+	<ul class="alt">
+		<% arr_categories.forEach((cat)=>{ %>
+		<li> 
+		<a style="text-decoration: none; 
+				  text-transform: capitalize;
+				  color: hsl(0,0%,<%- colorWeight(cat.count) %>%);" 
+			href="/<%- cat.path %>"><%- cat.name %> #(<%- cat.count %>)</a>
+		</li>
+		<% }) %>
+	</ul>
+	
+	</div>
+</section>

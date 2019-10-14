@@ -1,0 +1,90 @@
+# Header
+menu:
+  Home: /
+  About Me: /about
+  Newsletter: /newsletter
+  Archives: /archives
+  # Search bar will always end the tray
+  
+  # Thoughts On Strategy: /tags/strategy/index.html 
+  # Thoughts On Data: /tags/data/index.html
+  # Thoughts On Process: /tags/process/index.html
+  # Some of My Analysis: /tags/analysis/index.html
+  # On Working with People: /tags/people/index.html
+  # Short Stories: /tags/stories/index.html
+  # Posts with Quotes: /tags/quotes/index.html
+
+cachebust:
+  main_css: "?v=5"
+
+# Logo Image Source
+logo_src: /logo/logo.svg
+favicon_src: /logo/favicon.png
+larger_favicons: /logo/logo
+
+# Theme Main Subtitle
+subtitle_main: I'm a product strategist writing about technology.
+subtitle_main_h2: I Write Down My Thoughts For Me, But You Can Read Them Too.
+
+# Theme Secondary subtitle
+susbtitle_secondary: >
+  Business is balance. It's offense vs defense, it's new markets vs cash cows.
+  It's growth vs stability, it's feelings vs facts.
+  Read more on balance, business, technology, politics, parenting & 
+  everything in between.
+
+# Footer About Section
+about_footer: |
+  Engineer, Investor, MBA, Texan, & <a rel="noopener" href="/sayings">Sayings Collector</a><br/>
+  Writing the "coulds and shoulds" of tech etc.<br/>
+  Made with &#9829; via
+  <a href="https://mirageproject.com?utm_source=ericdmoore.com&utm_medium=web" rel="noopener"> 
+  <img src="/logo/mirage-triangles.svg" alt="" style="width:1em;height:1em">
+  irageProject</a> 
+  from <img src="/images/texas.svg" alt="" style="width:1em;height:1em;vertical-align:sub;">
+
+# Default post title
+default_post_title: Untitled
+
+# Default post cover index page (Recommended)
+default_cover_index: "http://placehold.it/450x450"
+
+# Default post cover index page (Optional)
+default_cover_detail: https://placeholdit.imgix.net/~text?txtsize=83&txt=1000%C3%97450&w=1000&h=450
+
+# Show Dates for posts and pages
+show_dates: false
+
+# Comments. Choose one by filling up the information
+comments:
+  # Disqus comments
+  disqus_shortname: ericdmoore-com
+  # Facebook comments
+  facebook:
+    appid:
+    comment_count: 5
+    comment_colorscheme: light
+
+# Google Analytics Tracking ID
+google_analytics: UA-2846911-11
+
+# Social Accounts
+facebook_url: https://www.facebook.com/moore.eric
+github_url: https://github.com/ericdmoore
+instagram_url: https://www.instagram.com/ericdmoore/
+linkedin_url: https://www.linkedin.com/in/ericmoore/
+spotify_url: https://open.spotify.com/user/122371781
+snapchat_url: https://www.snapchat.com/add/ericdmoore
+telegram_url: https://t.me/ericdmoore
+twitter_url: https://twitter.com/ericdmoore
+whatsapp_url: https://api.whatsapp.com/send?phone=19729898592&text=Hey%20I%20love%20your%20website%2C%20and%20I%20wanted%20to%20ask%20a%20quick%20question....
+
+# wechat: /images/wechat/share.jpg
+phone: "(888)546-4724"
+address: //www.google.com/maps/place/5959+Royal+Ln+%23539,+Dallas,+TX+75230/@32.8957383,-96.8079243,17z/data=!3m1!4b1!4m5!3m4!1s0x864c209d06857e45:0x88daa9388fd6a8fe!8m2!3d32.8957338!4d-96.8057356
+
+# googleplus_url: https://plus.google.com/
+# behance_url: https://www.behance.net/
+# fivehundredpx_url: https://500px.com/
+# email_url: "mailto:eric.d.moore@gmail.com"
+rss_url: /atom.xml

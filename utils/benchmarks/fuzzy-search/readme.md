@@ -1,0 +1,23 @@
+# Performance Test on Local Search Frameworks
+
+- Indexing
+  - (s) Time to Build A Cache
+    - .forEach
+    - .map
+    - 
+  - (s) Load time to mount the pre-cached index
+  - (mB) Raw Index/Cache Size 
+    - whyCare: has to be shipped to browser
+  - (mB) gz'd Cache Size
+    - whyCare: serve up to front end
+  - (p/f) Supports Incremental Index Building (aka: merge pre-computed caches)
+    - caculate performance savings of incremental builds
+- Querying
+  - (s) query performance
+  - Auto Correct
+    - (p/f) Recommends corrected spellings
+    - (p/f) Auto-Searches for corrected spellings
+    - (p/f) Recomemds used words (not a typical mis-spelled word or a typical mis-spelling)
+- Community
+- Documentation
+- API Flexibility / Supported Usage Pattens

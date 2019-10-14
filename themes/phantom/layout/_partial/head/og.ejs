@@ -1,0 +1,62 @@
+<% /*
+NOTE:
+ Facebook: 200x200px works best. 
+ Facebook recommends large images: up to 1200x630px wide. 
+*/
+
+let _categories = [];
+let _tags = [];
+let _images = [];
+
+// helper function to deal with exteranl images starting with '//'
+let fmtImgURL = (uri)=>{
+	if(uri.indexOf('//') >= 0){
+		return 'http:' + uri;
+	}
+	return config.url + uri	
+};
+
+// fill up vars categ + tags with cleaned data
+if (page.categories && page.tags){
+	page.categories.forEach((value)=>{
+		_categories.push(value.name)
+	});
+	_categories = _categories.join(',');
+
+	page.tags.forEach((value)=>{
+		_tags.push(value.name)
+	}); 
+} else {
+	// console.log('page has no categs')
+}
+
+// fill up the image arr
+if(page.cover_detail){
+	_images.push( fmtImgURL(page.cover_detail) );
+}
+
+if(page.cover_index){
+	_images.push( fmtImgURL(page.cover_index) );
+}
+
+if(_images.length < 1){
+_images.push( fmtImgURL( theme.larger_favicons + "@2x.png" ));	
+}
+
+%><!-- Open Graph Data -->
+<meta property="og:type" content="article"/>
+<meta property="og:title" content="<%- title %>"/>
+<meta property="og:site_name" content=" <%- config.title %> "/>
+<meta property="og:url" content="<%- config.url + config.root + page.path %>"/>
+<meta property="article:published_time" content="<%= full_date( page.date, 'YYYY-MM-DDTHH:mm:SSZ') %>"/> 
+<meta property="article:modified_time" content="<%= full_date( page.updated, 'YYYY-MM-DDTHH:mm:SSZ') %>"/>
+<meta property="article:author" content="<%= page.author || config.author %>"/>
+<meta property="og:description" content="<%= desc %>"/>
+<% _images.forEach((value)=>{ %> 
+<meta property="og:image" content="<%- value %>"/>	
+<% });  _tags.forEach((value)=>{ %> 
+<meta property="article:tag" content="<%- value %>"/>	
+<% }); if( _categories.length >0 ){ 
+	/* categories is now a comma joined string, so cannot use forEach */ %>
+<meta property="article:section" content="<%- _categories %>"/>	
+<% }; %>

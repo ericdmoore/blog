@@ -1,0 +1,14 @@
+<% if(page.prev || page.next) { %>
+    <div class="pagination-container">
+        <div class="pagination <%- page.prev ? "" : "disabled" %>">
+        	<a rel="prev" href="<%- config.root %><%- page.prev_link %>">
+                <i class="fas fa-caret-left"></i>
+        	</a>
+        </div>
+        <div class="pagination <%- page.next ? "" : "disabled" %>">
+        	<a rel="next" href="<%- config.root %><%- page.next_link %>">
+                <i class="fas fa-caret-right"></i>
+        	</a>
+        </div>
+    </div>
+<% } %>
