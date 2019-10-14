@@ -42,20 +42,20 @@ module.exports = {
       }
     ],
     loaders: [
-      {
-        test: /\.js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: [
-          {
-            loader: 'babel-loader',
-            query: { presets: ['es2015'] },
-            options: {
-              presets: ['@babel/preset-env'],
-              plugins: [require('@babel/plugin-proposal-object-rest-spread')]
-            }
-          }
-        ]
-      },
+      // {
+      //   test: /\.js$/,
+      //   exclude: /(node_modules|bower_components)/,
+      //   use: [
+      //     {
+      //       loader: 'babel-loader',
+      //       query: { presets: ['es2015'] },
+      //       options: {
+      //         presets: ['@babel/preset-env'],
+      //         plugins: [require('@babel/plugin-proposal-object-rest-spread')]
+      //       }
+      //     }
+      //   ]
+      // },
       {
         test: /\.(html)$/,
         use: {
