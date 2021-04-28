@@ -1,114 +1,62 @@
 'use strict'
 
-const AWS = require('aws-sdk')
+// const AWS = require('aws-sdk')
 const del = require('del')
-const path = require('path')
-let gulp = require('gulp')
+// const path = require('path')
+const gulp = require('gulp')
 const cp = require('child_process')
 const gutil = require('gulp-util')
 const sass = require('gulp-sass')
-// const watch     = require("gulp-watch");
+
 const exec = require('gulp-exec')
 const debug = require('gulp-debug')
 const concat = require('gulp-concat')
-
-// const miss      = require('mississippi');
-// const uglyfly   = require('gulp-uglify');
-// const critical = require('critical').stream;
+const getopts = require('getopts')
 
 const uglify = require('gulp-uglify-es').default
-// const htmlmin   = require('gulp-htmlmin');
+
 const cleanCSS = require('gulp-clean-css')
 const validator = require('gulp-html')
 const sourcemaps = require('gulp-sourcemaps')
 const awspublish = require('gulp-awspublish')
 const htmlreplace = require('gulp-html-replace')
 const parallelize = require('concurrent-transform')
-// const hash       = require('gulp-hash-filename');
-// const babel = require('gulp-babel');
 
-// var babel = require('babel/register');
-// var webpack = require('webpack');
+var webpack = require('webpack')
 const wbpk_config = require('./webpack.config.js')
 
-var uglify_es = require('uglify-es')
-var composer = require('gulp-uglify/composer')
-var minify = composer(uglify_es, console)
+const uglify_es = require('uglify-es')
+const composer = require('gulp-uglify/composer')
+const minify = composer(uglify_es, console)
+
+// const watch     = require("gulp-watch");
+// const miss      = require('mississippi');
+// const uglyfly   = require('gulp-uglify');
+// const critical = require('critical').stream;
+// const htmlmin   = require('gulp-htmlmin');
+// const hash       = require('gulp-hash-filename');
+// const babel = require('gulp-babel');
+// var babel = require('babel/register');
 
 // Make your own aws credential file see template below
-const aws_login = require('./aws.js')
 const awsEnvs = require('./aws-envs.js')
-let config = require('./gulp.config.js')
+const gulpConfig = require('./gulp.config.js')
 const theme_include = require('./themes/phantom/source/_includes/inline-html.js')
 
 //theme_include.inline.criticalCSS
 const theme_prefix = './themes/phantom/'
-/*  
 
-$> cat ./aws.js
-exports.test_creds = {
-  "key"   : "***********",
-  "secret": "**********************",
-  "bucket": "test.example.com",
-  "region": "us-east-1"
-}; exports.prod_creds = {
-  "key"   : "***********",
-  "secret": "**********************",
-  "bucket": "prod.example.com",
-  "region": "us-east-1"
-}; 
-*/
-
-/* command line recommendations:
-> Include Drafts:    hexo g --drafts && gulp
-> Regular Posts :    hexo g && gulp
-*/
-
-/* ***********************************
- * ===================================
- * Philosphy & Convetions
- * ===================================
- * Ideally gulp is only run after the hexo build.
- * Thus the source of the assets should be the public hexo build
- *
- *
- * ===================================
- * ToDo
- * ===================================
- * 1. gulp-html-replace
- *       use for inline css?
- *       use for responsive images?
- * 2.
- *
- *
- * ===================================
- *
- * ===================================*
- *
- *
- *
- *
- *
- * ===================================
- *  Manual Tasks
- * ===================================
- *
- *  Validate HTML = html
- *  Merge Scripts = scripts
- *  All of the above = check
- *********************************** */
-
-let search_xml = ['./public/search.xml']
-let content_json = ['./public/content.json']
-let top_pages = ['./public/*.html', './public/page/**/*.html']
-let index = ['./public/index.html']
-let html = ['./public/*.html', './public/**/*.html']
-let js = ['./public/**/*.js']
-let css = ['./public/**/*.css']
-let _sass = ['./public/**/*.scss']
-let xml = ['./public/**/*.xml', '!./public/search.xml']
-let json = ['./public/**/*.json', '!./public/content.json']
-let fonts = [
+const search_xml = ['./public/search.xml']
+const content_json = ['./public/content.json']
+const top_pages = ['./public/*.html', './public/page/**/*.html']
+const index = ['./public/index.html']
+const html = ['./public/*.html', './public/**/*.html']
+const js = ['./public/**/*.js']
+const css = ['./public/**/*.css']
+const _sass = ['./public/**/*.scss']
+const xml = ['./public/**/*.xml', '!./public/search.xml']
+const json = ['./public/**/*.json', '!./public/content.json']
+const fonts = [
   './public/**/*.ttf',
   './public/**/*.woff',
   './public/**/*.woff2',
@@ -150,14 +98,19 @@ let images = [
 
 // negative paths are sticky and will be passed down
 // `everything` + the exclusion of all the listed ones above.
-let the_rest = ['./public/**/*']
-for (let arr of [html, js, json, css, _sass, xml, fonts, media, images]) {
-  let arr2 = arr.map(val => {
-    if (val.slice(0, 1) === '.') return '!' + val
-    else return val
-  })
-  the_rest = the_rest.concat(arr2)
-}
+let the_rest = [
+  ...html,
+  ...js,
+  ...json,
+  ...css,
+  ...xml,
+  ...fonts,
+  ...media,
+  ...images,
+  ..._sass
+].reduce((p, val) => [...p, val.startsWith('.') ? `!${val}` : val], [
+  './public/**/*'
+])
 
 const _5MIN = 300
 const _1HOUR = 3600
@@ -200,35 +153,50 @@ let html_headers = {
   ...HSTS
 }
 
-//
-// const publiser = aws-env
+/**
+ * Parse CLI and setup the Publiher Env
+ */
+// parse CLI
+const options = getopts(process.argv.slice(2), {
+  alias: {
+    environment: 'env'
+  },
+  default: {
+    env: 'test',
+    mode: 'development'
+  },
+  string: ['env', 'mode']
+})
+
+// redirect if needed
+if (
+  typeof awsEnvs[options.env] !== 'string' &&
+  'redirectTo' in awsEnvs[options.env]
+) {
+  options.env = awsEnvs[options.env].redirectTo
+}
+
+// validate
+if (!Object.keys(awsEnvs).includes(options.env)) {
+  throw new Error('Plese use a listed env name from the aws-envs.js file')
+}
+const publiser = awsEnvs[options.env].publiser
 
 // create a new publisher using S3 options for reuse in the following gulp tasks
 // http://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/S3.html#constructor-property
-const test_publisher = awspublish.create(
-  {
-    region: aws_login.test_creds.region,
-    // accessKeyId: aws_login.test_creds.key,
-    // secretAccessKey: aws_login.test_creds.secret,
-    // signatureVersion: 'v2',
-    credentials: new AWS.SharedIniFileCredentials({
-      profile: 'personal_default'
-    }),
-    params: { Bucket: aws_login.test_creds.bucket }
-  },
-  { cacheFileName: 'cache4testpublishing' }
-)
 
-const prod_publisher = awspublish.create(
-  {
-    region: aws_login.prod_creds.region,
-    credentials: new AWS.SharedIniFileCredentials({
-      profile: 'personal_default'
-    }),
-    params: { Bucket: aws_login.prod_creds.bucket }
-  },
-  { cacheFileName: 'cache4prodpublishing' }
-)
+gulp.task('print', done => {
+  console.log({ options })
+  done(null, options)
+})
+
+gulp.task('webpack', done => {
+  const compiler = webpack(wbpk_config({ mode: '', env: {} }))
+  const s = compiler.run((err, stats) => {
+    console.log({ stats })
+    done(null, stats)
+  })
+})
 
 gulp.task('images', function() {
   return watch('./rawimages/**/*.*')
@@ -236,7 +204,7 @@ gulp.task('images', function() {
     .pipe(exec.reporter({ err: true, stderr: true, stdout: true }))
 })
 
-gulp.task('resize', function() {
+gulp.task('resize2', function() {
   var options = {
     continueOnError: false, // default = false, true means don't emit error event
     pipeStdout: false, // default = false, true means stdout is written to file.contents
@@ -257,18 +225,6 @@ gulp.task('resize', function() {
   // copy assets
   gulp.src('./_static/assets/**/*.*').pipe(removeFiles())
   gulp.src('./assets/**/*.*').pipe(gulp.dest('./_static/assets'))
-})
-
-gulp.task('webpack', function() {
-  let entries = Object.keys(wbpk_config.entry).map(function(key) {
-    return wbpk_config.entry[key]
-  })
-
-  return gulp
-    .src(entries)
-    .pipe(babel({ presets: ['env'] }))
-    .pipe(webpack(wbpk_config))
-    .pipe(gulp.dest('./public/build-assets/'))
 })
 
 gulp.task('html', function() {
@@ -351,7 +307,7 @@ gulp.task('swap:js', function() {
         {
           js: {
             src: [
-              ['/build-assets/js/concat.min.js', config.cachebust.js_bundle]
+              ['/build-assets/js/concat.min.js', gulpConfig.cachebust.js_bundle]
             ],
             tpl: '<script type="text/javascript" src="%s%s"></script>'
           }
@@ -371,7 +327,10 @@ gulp.task('swap:css', function() {
         {
           css: {
             src: [
-              ['/build-assets/css/concat.min.css', config.cachebust.js_bundle]
+              [
+                '/build-assets/css/concat.min.css',
+                gulpConfig.cachebust.js_bundle
+              ]
             ],
             tpl: '<link rel="stylesheet" type="text/css" href="%s%s"/>'
           }
@@ -400,7 +359,10 @@ gulp.task('swap', function() {
           {
             css: {
               src: [
-                ['/build-assets/css/concat.min.css', config.cachebust.js_bundle]
+                [
+                  '/build-assets/css/concat.min.css',
+                  gulpConfig.cachebust.js_bundle
+                ]
               ],
               tpl: '<link rel="stylesheet" type="text/css" href="%s?v=%s"/>'
             }
@@ -419,7 +381,10 @@ gulp.task('swap', function() {
           {
             js: {
               src: [
-                ['/build-assets/js/concat.min.js', config.cachebust.js_bundle]
+                [
+                  '/build-assets/js/concat.min.js',
+                  gulpConfig.cachebust.js_bundle
+                ]
               ],
               tpl: '<script type="text/javascript" src="%s?v=%s"></script>'
             }
@@ -475,32 +440,27 @@ gulp.task('criticalCSS', function() {
     .pipe(gulp.dest('./public/'))
 })
 
-/*****************************
- * Start Test Publish Routines
- *
- *
- ******************************/
-gulp.task('test_publishIMG', function() {
+gulp.task('publishIMG', function() {
   // define custom headers
   return gulp
     .src(images)
     .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-    .pipe(parallelize(test_publisher.publish(image_headers), 32))
-    .pipe(test_publisher.cache())
+    .pipe(parallelize(publisher.publish(image_headers), 32))
+    .pipe(publiser.cache())
     .pipe(awspublish.reporter())
 })
 
-gulp.task('test_publishFonts', function() {
+gulp.task('publishFonts', function() {
   return gulp
     .src(fonts)
     .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-    .pipe(parallelize(test_publisher.publish(font_headers), 4))
-    .pipe(test_publisher.cache())
+    .pipe(parallelize(publisher.publish(font_headers), 4))
+    .pipe(publisher.cache())
     .pipe(awspublish.reporter())
 })
 
 gulp.task(
-  'test_publishJS',
+  'publishJS',
   gulp.series(['build'], function() {
     return (
       gulp
@@ -508,15 +468,15 @@ gulp.task(
         // .pipe(debug({title: 'test JS:'}))
         .pipe(minify())
         .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-        .pipe(parallelize(test_publisher.publish(js_headers), 8))
-        .pipe(test_publisher.cache())
+        .pipe(parallelize(publisher.publish(js_headers), 8))
+        .pipe(publisher.cache())
         .pipe(awspublish.reporter())
     )
   })
 )
 
 gulp.task(
-  'test_publishCSS',
+  'publishCSS',
   gulp.series(['build'], function() {
     return (
       gulp
@@ -524,24 +484,24 @@ gulp.task(
         // .pipe(debug({title: 'unicorn:'}))
         .pipe(cleanCSS({ compatibility: '*' }))
         .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-        .pipe(parallelize(test_publisher.publish(css_headers), 4))
-        .pipe(test_publisher.cache())
+        .pipe(parallelize(publisher.publish(css_headers), 4))
+        .pipe(publisher.cache())
         .pipe(awspublish.reporter())
     )
   })
 )
 
-gulp.task('test_publishXML', function() {
+gulp.task('publishXML', function() {
   return gulp
     .src(xml)
     .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-    .pipe(test_publisher.publish(xml_headers))
-    .pipe(test_publisher.cache())
+    .pipe(publisher.publish(xml_headers))
+    .pipe(publisher.cache())
     .pipe(awspublish.reporter())
 })
 
 gulp.task(
-  'test_publishHTML',
+  'publishHTML',
   gulp.series(['build'], function() {
     return (
       gulp
@@ -549,33 +509,33 @@ gulp.task(
         // .pipe(debug({title: 'unicorn:'}))
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-        .pipe(parallelize(test_publisher.publish(html_headers), 16))
-        .pipe(test_publisher.cache())
+        .pipe(parallelize(publisher.publish(html_headers), 16))
+        .pipe(publisher.cache())
         .pipe(awspublish.reporter())
     )
   })
 )
 
-gulp.task('test_publishMEDIA', function() {
+gulp.task('publishMEDIA', function() {
   return (
     gulp
       .src(media.concat(json))
       // .pipe(debug({title: 'testMEDIA: '}))
       .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      .pipe(parallelize(test_publisher.publish(media_headers), 8))
-      .pipe(test_publisher.cache())
+      .pipe(parallelize(publisher.publish(media_headers), 8))
+      .pipe(publisher.cache())
       .pipe(awspublish.reporter())
   )
 })
 
-gulp.task('test_publish', function() {
+gulp.task('publish', function() {
   return (
     gulp
       .src(the_rest)
       // .pipe(debug({title: 'Rest: '}))
       .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      .pipe(parallelize(test_publisher.publish(the_rest_headers), 8))
-      .pipe(test_publisher.cache())
+      .pipe(parallelize(publisher.publish(the_rest_headers), 8))
+      .pipe(publisher.cache())
       .pipe(awspublish.reporter())
   )
 })
@@ -583,25 +543,29 @@ gulp.task('test_publish', function() {
 gulp.task(
   'publish',
   gulp.parallel([
-    'test_publishHTML',
-    'test_publishIMG',
-    'test_publishFonts',
-    'test_publishXML',
-    'test_publishMEDIA',
-    'test_publishCSS',
-    'test_publishJS',
-    'test_publish'
+    'publishHTML',
+    'publishIMG',
+    'publishFonts',
+    'publishXML',
+    'publishMEDIA',
+    'publishCSS',
+    'publishJS',
+    'publish'
   ])
 )
+
+gulp.task('openUrl', () => {
+  let url = awsEnvs[options.env].url
+  const command = `open ${url}`
+  console.log(`${url}`)
+  return cp.exec(command)
+})
 
 gulp.task(
   'default',
-  gulp.series(['build', 'publish'], () => {
-    let url = 'https://its.ericdmoore.com/'
-    const command = `open ${url}`
-    return cp.exec(command)
-
-    // return cp.exec('open ' + url, (error, stdout, stderr) => {
+  gulp.series(
+    ['build', 'publish', 'openUrl']
+    // ()=>{ return cp.exec('open ' + url, (error, stdout, stderr) => {
     //   if (error) {
     //     console.error(`exec error: ${error}`)
     //     return
@@ -613,145 +577,5 @@ gulp.task(
     //     console.log(`stderr: ${stderr}`)
     //   }
     // })
-  })
-)
-
-/*****************************
- * Start Prod Publish Routines
- *
- *
- ******************************/
-
-gulp.task('prod_publishIMG', function() {
-  // define custom headers
-  // gzip files + set `Content-Encoding` file headers in s3
-  return (
-    gulp
-      .src(images)
-      // YAY publish + GZIP == Test Env
-      .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      // publisher will add Content-Length, Content-Type and headers specified above
-      // If not specified it will set x-amz-acl to public-read by default
-      .pipe(parallelize(prod_publisher.publish(image_headers), 25))
-      // create a cache file to speed up consecutive uploads
-      .pipe(prod_publisher.cache())
-      // print upload updates to console
-      .pipe(awspublish.reporter())
   )
-})
-
-gulp.task('prod_publishFonts', function() {
-  return gulp
-    .src(fonts)
-    .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-    .pipe(parallelize(prod_publisher.publish(font_headers), 5))
-    .pipe(prod_publisher.cache())
-    .pipe(awspublish.reporter())
-})
-
-gulp.task('prod_publishCSS', function() {
-  return (
-    gulp
-      .src(css)
-      // .pipe(debug({title: 'unicorn:'}))
-      .pipe(cleanCSS({ compatibility: '*' }))
-      .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      .pipe(parallelize(prod_publisher.publish(css_headers), 5))
-      .pipe(prod_publisher.cache())
-      .pipe(awspublish.reporter())
-  )
-})
-
-gulp.task('prod_publishXML', function() {
-  return gulp
-    .src(xml)
-    .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-    .pipe(prod_publisher.publish(xml_headers))
-    .pipe(prod_publisher.cache())
-    .pipe(awspublish.reporter())
-})
-
-gulp.task('prod_publishJS', function() {
-  return gulp
-    .src(js)
-    .pipe(debug({ title: 'js:' }))
-    .pipe(minify())
-    .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-    .pipe(parallelize(prod_publisher.publish(js_headers), 10))
-    .pipe(prod_publisher.cache())
-    .pipe(awspublish.reporter())
-})
-
-gulp.task('prod_publishMEDIA', function() {
-  return (
-    gulp
-      .src(media.concat(json))
-      // .pipe(debug({title: 'media:'}))
-      .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      .pipe(parallelize(prod_publisher.publish(media_headers), 20))
-      .pipe(prod_publisher.cache())
-      .pipe(awspublish.reporter())
-  )
-})
-
-gulp.task('prod_publishHTML', function() {
-  return (
-    gulp
-      .src(html)
-      // .pipe(debug({title: 'html:'}))
-      .pipe(htmlmin({ collapseWhitespace: true }))
-      .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      .pipe(parallelize(prod_publisher.publish(html_headers), 20))
-      .pipe(prod_publisher.cache())
-      .pipe(awspublish.reporter())
-  )
-})
-
-gulp.task('prod_publish', function() {
-  return (
-    gulp
-      .src(the_rest)
-      // .pipe(debug({title: 'Rest: '}))
-      .pipe(awspublish.gzip({ skipGrowingFiles: true }))
-      .pipe(parallelize(prod_publisher.publish(the_rest_headers), 10))
-      .pipe(prod_publisher.cache())
-      .pipe(awspublish.reporter())
-  )
-})
-
-gulp.task(
-  'production',
-  gulp.parallel([
-    'js',
-    'prod_publishIMG',
-    'prod_publishCSS',
-    'prod_publishFonts',
-    'prod_publishXML',
-    'prod_publishJS',
-    'prod_publishMEDIA',
-    'prod_publishHTML',
-    'prod_publish'
-  ])
-)
-
-gulp.task(
-  'prod',
-  gulp.series(['production'], () => {
-    let url = 'https://im.ericdmoore.com/'
-    const command = `open ${url}`
-    return cp.exec(command)
-
-    // return cp.exec('open ' + url, (error, stdout, stderr) => {
-    //   if (error) {
-    //     console.error(`exec error: ${error}`)
-    //     return
-    //   }
-    //   if (stdout) {
-    //     console.log(`stdout: ${stdout}`)
-    //   }
-    //   if (stderr) {
-    //     console.log(`stderr: ${stderr}`)
-    //   }
-    // })
-  })
 )

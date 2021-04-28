@@ -1,4 +1,5 @@
-<% /*
+<% 
+/*
 	// ref: https://zespia.tw/warehouse/Query.html
 
 	Sort by:
@@ -11,17 +12,15 @@
 		- config column height?
 */
 
-let arr_tags = site.tags.map((item)=>{
+const arr_tags = site.tags.map((item)=>{
 					return {name:  item.name, 
 							path:  item.path,
 							posts: item.posts,
-							count: item.posts.length}
-				});
+							count: item.posts.length} });
 
 arr_tags.sort((a,b)=>{return b.count - a.count });
 
-let describe = (arr)=>{
-
+const describe = (arr)=>{
 	const len =  arr_tags.length;
 	const per10 =  Math.floor(len*.1) - 1;
 	const per20 =  Math.floor(len*.2) - 1;
@@ -48,23 +47,22 @@ let describe = (arr)=>{
 			};
 };
 
-let colorRange = (desc)=>{
-	let _max = Math.max(desc.max);
-	let light_color = 75;
-	let dark_color = 2;
+const colorRange = (desc)=>{
+	const _max = Math.max(desc.max);
+	const light_color = 75;
+	const dark_color = 2;
 	
 	return (input)=>{
 		return Math.floor(light_color - (input/_max * (light_color - dark_color)) );
 	};
 };
 
-let units = (idx, units)=>{
-	let prefix = units.toString()+"u"
+const units = (idx, units)=>{
+	const prefix = units.toString()+"u"
 	return ((idx+1) % Math.floor(12/units) === 0) ? prefix + "$" : prefix;
 };
 
 let colorWeight = colorRange( describe(arr_tags) );
-
 
 /* work in progess: Add Search
 

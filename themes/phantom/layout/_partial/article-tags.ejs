@@ -1,5 +1,5 @@
 <% let makeButton = (tag)=>{
-	return '<a href="' + config.root + tag.path + '" class="button small">' + tag.name + '</a>'
+	return `<a href="${config.root + tag.path}" class="button small">${tag.name} </a>`
 }%> 
 
 <% if(page.categories) { %>
@@ -13,6 +13,7 @@
 	</div>
 <% } %>
 <div style="display:inline-block" class="tags">
-    <%- page.tags.reduce( (all, t)=>{return all.concat(makeButton(t))}, [])
-    			 .join(' ') %>
+    <%- page.tags.reduce( 
+		(all, t)=>{return all.concat(makeButton(t))}, [])
+    			join(' ') %>
 </div>

@@ -80,7 +80,7 @@ let colorWeight = colorRange( describe(arr_categories) );
 		<li> 
 		<a style="text-decoration: none; 
 				  text-transform: capitalize;
-				  color: hsl(0,0%,<%- colorWeight(cat.count) %>%);" 
+				  color: hsl(0,0%,<%- colorWeight(cat.count) %>%); " 
 			href="/<%- cat.path %>"><%- cat.name %> #(<%- cat.count %>)</a>
 		</li>
 		<% }) %>

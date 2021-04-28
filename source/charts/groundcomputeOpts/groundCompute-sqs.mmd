@@ -1,0 +1,14 @@
+graph LR
+  UnProcessedCloudData --> SNS:NewWork 
+  SNS:NewWork --> ƒ.trafficCheck 
+  ƒ.trafficCheck --> DoNeedMore{ Need More Funcs? }
+  DoNeedMore -->|No| n[Null Op]
+  DoNeedMore -->|Yes| SNS:StartHelpers
+  SNS:NewWork --> SQS:WorkWaiting
+  bram:[Bramble]-->|longpoll|SQS:WorkWaiting
+  bram:[Bramble] -->|ƒ.ProcessData| DATA(ProcessedData)
+  DATA --> SNS:DataComplete
+  
+
+
+  

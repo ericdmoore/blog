@@ -2,30 +2,21 @@
 <html dir="ltr" lang="en-US" prefix="og: http://ogp.me/ns#">
 <% /* itemscope itemtype="http://schema.org/Article" */ %> 
     
-
 <!-- Head tag -->
 <%- partial('_partial/head') %>
 
 <body>
-
     <div id="wrapper">
         <%- partial('_partial/menu') %>
-
         <div id="main">
             <div class="inner">
-
                 <!-- Main Content -->
                 <%- body %>
-
             </div>
         </div>
-
         <%- partial('_partial/footer.ejs') %>
     </div>
-
     <!-- After footer scripts -->
     <%- partial('_partial/after-footer') %>
-
 </body>
-
 </html>

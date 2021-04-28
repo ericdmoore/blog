@@ -1,0 +1,12 @@
+graph LR
+  UnProcessedCloudData --> Kinesis:FireHose1
+  Kinesis:FireHose1  --> S3:DataLogBucket
+  S3:DataLogBucket --> SNS:NewWork
+  SNS:NewWork --> SQS:WorkWaiting
+  SNS:NewWork --> λƒ.trafficCheck
+  λƒ.trafficCheck --> DoNeedMore{ Need More Funcs? }
+  DoNeedMore -->|No| n[Null Op]
+  DoNeedMore -->|Yes| SNS:StartHelpers
+  bram:[Bramble]-->|longpoll|SQS:WorkWaiting
+  bram:[Bramble] -->|ƒ.ProcessData| DATA(ProcessedData)
+  DATA --> SNS:DataComplete
